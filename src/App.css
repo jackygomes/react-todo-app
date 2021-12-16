@@ -1,38 +1,88 @@
-.App {
+body {
+  background-color: #261931;
+}
+.todo-main {
+  width: 650px;
+  margin: 50px auto 0;
+  background-color: #f2f0ff;
+  border-radius: 3px;
+  padding: 30px 20px 50px;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.todo-form {
+  width: 600px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.todo-input {
+  width: 67%;
+  border: 1px solid #301728ff;
+  padding: 8px 8px;
+  border-radius: 3px;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.todo-button {
+  width: 28%;
+  background-color: #301728ff;
+  color: rgb(202, 153, 197);
+  border: 1px solid #301728;
+  padding: 8px;
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+  cursor: pointer;
+}
+.todo-list {
+  width: 600px;
+  margin: 0 auto;
+}
+.todo-item {
+  padding: 8px 10px;
+  background-color: #4f3466ff;
+  color: rgb(202, 153, 197);
+  text-align: left;
+  margin-top: 10px;
+  border-radius: 3px;
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  width: 82%;
+  height: 100%;
+  left: 47%;
+  top: 0;
+  background-color: #09090945;
+  transform: translateX(-50%);
+}
+.overlay::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 3px;
+  background-color: #ff4343;
+  transform: translateY(-50%);
+}
+.todo-action {
+  display: inline-block;
+  float: right;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.todo-action span {
+  background-color: #a586bf73;
+  padding: 2px 12px 4px;
+  border-radius: 2px;
+  color: #fff;
+  margin-left: 6px;
+  cursor: pointer;
+}
+.todo-action span:hover {
+  background-color: #e2d1fd;
+  color: #575757;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.todo-edit {
+  width: 600px;
+  margin: 0 auto;
 }
