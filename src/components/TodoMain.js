@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 const TodoMain = () => {
   const [todos, setTodos] = useState([]);
   const [todoValue, setTodoValue] = useState("");
-  const [render, setRender] = useState(0);
   const [edit, setEdit] = useState(false);
   const [editData, setEditData] = useState({});
   const [updateTodoData, setUpdateTodoData] = useState("");
@@ -14,7 +13,7 @@ const TodoMain = () => {
       id: todos.length > 0 ? todos[0].id + 1 : 1,
       title: todoValue,
       date: moment().format("MMM Do YYYY, h:mm:ss a"),
-      done: false,
+      done: 1,
     };
     const todoTemp = [newTodoObject, ...todos];
     setTodos([newTodoObject, ...todos]);
@@ -49,12 +48,12 @@ const TodoMain = () => {
     setEdit(false);
   };
 
-  const doneTodo = (todoId) => {
+  const doneTodo = (todoId, status) => {
     const tempTodos = todos;
 
     const todoFind = tempTodos.find(({ id }) => id === todoId);
 
-    todoFind.done = !todoFind.done;
+    todoFind.done = status;
 
     setTodos([...tempTodos]);
     localStorage.setItem("todos", JSON.stringify(tempTodos));
@@ -64,7 +63,6 @@ const TodoMain = () => {
     const todoObject = JSON.parse(localStorage.getItem("todos"));
     setTodos(todoObject);
   }, []);
-  //key={render}
   return (
     <div className="todo-main">
       <h1>What's your plan for today?</h1>
@@ -88,21 +86,68 @@ const TodoMain = () => {
 
           <div className="todo-list">
             {todos &&
-              todos.map((todo, index) => (
-                <div className="todo-item" key={index}>
-                  {todo.done && <div className="overlay"></div>}
-                  <input
-                    type="checkbox"
-                    checked={todo.done ? "checked" : ""}
-                    onClick={() => doneTodo(todo.id)}
-                  />
-                  &nbsp; {todo.title} | {todo.date}
-                  <div className="todo-action">
-                    <span onClick={() => editTodo(todo.id)}>edit</span>
-                    <span onClick={() => deleteTodo(todo.id)}>delete</span>
-                  </div>
-                </div>
-              ))}
+              todos.map(
+                (todo, index) =>
+                  todo.done === 1 && (
+                    <div className="todo-item" key={index}>
+                      {/* {todo.done && <div className="overlay"></div>} */}
+                      <input
+                        type="checkbox"
+                        onClick={() => doneTodo(todo.id, 2)}
+                      />{" "}
+                      In progress |&nbsp;
+                      <input
+                        type="checkbox"
+                        onClick={() => doneTodo(todo.id, 3)}
+                      />{" "}
+                      Done |&nbsp;
+                      {todo.title} | {todo.date}
+                      <div className="todo-action">
+                        <span onClick={() => editTodo(todo.id)}>edit</span>
+                        <span onClick={() => deleteTodo(todo.id)}>delete</span>
+                      </div>
+                    </div>
+                  )
+              )}
+          </div>
+
+          <div className="todo-list">
+            {todos &&
+              todos.map(
+                (todo, index) =>
+                  todo.done === 2 && (
+                    <div className="todo-item" key={index}>
+                      {/* {todo.done && <div className="overlay"></div>} */}
+                      <input
+                        type="checkbox"
+                        onClick={() => doneTodo(todo.id, 3)}
+                      />{" "}
+                      Done |&nbsp;
+                      {todo.title} | {todo.date}
+                      <div className="todo-action">
+                        <span onClick={() => editTodo(todo.id)}>edit</span>
+                        <span onClick={() => deleteTodo(todo.id)}>delete</span>
+                      </div>
+                    </div>
+                  )
+              )}
+          </div>
+
+          <div className="todo-list">
+            {todos &&
+              todos.map(
+                (todo, index) =>
+                  todo.done === 3 && (
+                    <div className="todo-item" key={index}>
+                      {/* {todo.done && <div className="overlay"></div>} */}
+                      {todo.title} | {todo.date}
+                      <div className="todo-action">
+                        <span onClick={() => editTodo(todo.id)}>edit</span>
+                        <span onClick={() => deleteTodo(todo.id)}>delete</span>
+                      </div>
+                    </div>
+                  )
+              )}
           </div>
         </div>
       )}

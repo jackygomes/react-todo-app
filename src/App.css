@@ -2,7 +2,7 @@ body {
   background-color: #261931;
 }
 .todo-main {
-  width: 650px;
+  width: 100%;
   margin: 50px auto 0;
   background-color: #f2f0ff;
   border-radius: 3px;
@@ -35,6 +35,8 @@ body {
 .todo-list {
   width: 600px;
   margin: 0 auto;
+  border-bottom: 1px solid red;
+  padding-bottom: 30px;
 }
 .todo-item {
   padding: 8px 10px;
